@@ -1,9 +1,10 @@
-﻿using AspBlog.Domain.Entities;
+﻿using AspBlog.Abstractions.Repositories;
+using AspBlog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspBlog.Infrastructure.Repositories
 {
-    public class BaseRepository<TEntity>(DbContext dbContex, DbSet<TEntity> dbSet) where TEntity : BaseEntity
+    public class BaseRepository<TEntity>(DbContext dbContex, DbSet<TEntity> dbSet) : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext _dbContex = dbContex;
 
@@ -37,9 +38,7 @@ namespace AspBlog.Infrastructure.Repositories
 
         public async Task<int> UpdateAsync(params TEntity[] entities)
         {
-            foreach (var entity in entities)
-                _dbSet.Update(entity);
-
+            _dbSet.UpdateRange(entities);
             return await _dbContex.SaveChangesAsync();
         }
 
