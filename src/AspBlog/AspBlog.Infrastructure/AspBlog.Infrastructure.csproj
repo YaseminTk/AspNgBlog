@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspBlog.Abstractions\AspBlog.Abstractions.csproj" />
     <ProjectReference Include="..\AspBlog.Domain\AspBlog.Domain.csproj" />
   </ItemGroup>
 
