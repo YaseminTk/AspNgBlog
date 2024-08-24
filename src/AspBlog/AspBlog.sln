@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspBlog.API", "AspBlog.API\AspBlog.API.csproj", "{35138891-1DC3-4DC3-AF50-ACE00FCF8449}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspBlog.Domain", "AspBlog.Domain\AspBlog.Domain.csproj", "{D520323A-B209-434F-BB87-56C7540FD03D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{35138891-1DC3-4DC3-AF50-ACE00FCF8449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35138891-1DC3-4DC3-AF50-ACE00FCF8449}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35138891-1DC3-4DC3-AF50-ACE00FCF8449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D520323A-B209-434F-BB87-56C7540FD03D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D520323A-B209-434F-BB87-56C7540FD03D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D520323A-B209-434F-BB87-56C7540FD03D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D520323A-B209-434F-BB87-56C7540FD03D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
