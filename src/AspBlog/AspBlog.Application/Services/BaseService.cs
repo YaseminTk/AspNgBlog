@@ -1,6 +1,6 @@
 ﻿using AspBlog.Abstractions.Repositories;
 using AspBlog.Abstractions.Services;
-using AspBlog.Application.DTOs.Base;
+using AspBlog.Abstractions.Services.DTOs.Base;
 using AspBlog.Domain.Entities;
 using AutoMapper;
 
