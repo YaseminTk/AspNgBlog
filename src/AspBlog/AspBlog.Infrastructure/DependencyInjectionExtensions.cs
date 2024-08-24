@@ -8,6 +8,6 @@ namespace AspBlog.Infrastructure
     public static class DependencyInjectionExtensions
     {
         public static IServiceCollection AddPostRepository(this IServiceCollection services) 
-            => services.AddScoped<IPostRepository<Post>, PostRepository>();
+            => services.AddScoped<IPostRepository<Post, PostInfo>, PostRepository>();
     }
 }
