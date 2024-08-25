@@ -2,6 +2,7 @@
 using AspBlog.Abstractions.Services;
 using AspBlog.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AspBlog.API.Controllers
 {
@@ -29,6 +30,7 @@ namespace AspBlog.API.Controllers
         {
             try
             {
+                post.CreatedById = User.GetId();
                 return await postService.CreateAsync(post) ? Ok() : BadRequest();
             }
             catch(Exception ex)
@@ -43,6 +45,7 @@ namespace AspBlog.API.Controllers
         {
             try
             {
+                post.ChangedById = User.GetId();
                 return await postService.UpdateAsync(post) ? Ok() : BadRequest();
             }
             catch (Exception ex)

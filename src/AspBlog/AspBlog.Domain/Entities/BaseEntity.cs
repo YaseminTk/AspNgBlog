@@ -21,5 +21,21 @@ namespace AspBlog.Domain.Entities
         [AllowNull]
         [Column("changed_at", TypeName = "datetime2")]
         public DateTime? ChangedAt { get; set; } = null;
+
+        [Required]
+        [NotNull]
+        [Column("created_by_id")]
+        public required int CreatedById { get; init; }
+
+        [Required]
+        [NotNull]
+        [Column("changed_by_id")]
+        public required int ChangedById { get; set; }
+
+        [ForeignKey(nameof(CreatedById))]
+        public User? CreatedBy { get; init; }
+
+        [ForeignKey(nameof(ChangedById))]
+        public User? ChangedBy { get; init; }
     }
 }

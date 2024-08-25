@@ -9,7 +9,7 @@ namespace AspBlog.Domain.Entities
     {
         [Required]
         [NotNull]
-        [StringLength(100)]
+        [Column("content", TypeName = "nvarchar(max)")]
         public required string Content { get; init; }
     }
 }
