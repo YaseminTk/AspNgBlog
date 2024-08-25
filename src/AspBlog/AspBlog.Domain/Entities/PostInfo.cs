@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AspBlog.Domain.Entities
 {
@@ -15,5 +16,16 @@ namespace AspBlog.Domain.Entities
         [StringLength(100)]
         [Column("description")]
         public required string Description { get; set; }
+
+        [Required]
+        [NotNull]
+        [Column("created_by_id")]
+        public required int CreatedById { get; init; }
+
+        [ForeignKey(nameof(CreatedById))]
+        public User? CreatedBy { get; init; }
+
+        [NotMapped]
+        public string? Author => CreatedBy?.FullName;
     }
 }
