@@ -2,10 +2,9 @@
 
 namespace AspBlog.Abstractions.DTOs.User
 {
-    public record UserUpdateDto(
+    public record LogInUpdateDto(
         int Id,
         string UserName,
-        string FullName,
-        string Role
+        string Password
         ) : BaseUpdateDto(Id);
 }

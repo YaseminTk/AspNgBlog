@@ -15,9 +15,11 @@ namespace AspBlog.Application
             CreateMap<UserCreateDto, User>().ForMember(
                 user => user.PasswordHash, 
                 opt => opt.MapFrom(dto => passwordHasher.HashPassword(dto.UserName, dto.Password)));
-            CreateMap<UserUpdateDto, User>().ForMember(
+            CreateMap<UserUpdateDto, User>();
+            CreateMap<LogInUpdateDto, User>().ForMember(
                 user => user.PasswordHash,
                 opt => opt.MapFrom(dto => passwordHasher.HashPassword(dto.UserName, dto.Password)));
+            CreateMap<LogInDto, LogInUpdateDto>();
 
             CreateMap<Post, PostDto>();
             CreateMap<PostInfo, PostInfoDto>();
