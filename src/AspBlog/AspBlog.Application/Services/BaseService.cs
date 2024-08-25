@@ -42,14 +42,22 @@ namespace AspBlog.Application.Services
 
         public async Task<bool> UpdateAsync(TUpdateDto dto)
         {
-            var entity = _mapper.Map<TEntity>(dto);
-            return await _repository.UpdateAsync(entity);
+            var current_entitiy = await _repository.GetByIdAsync(dto.Id);
+            var entity = _mapper.Map(dto, current_entitiy);
+            return entity is not null && await _repository.UpdateAsync(entity);
         }
 
         public async Task<int> UpdateAsync(params TUpdateDto[] dtos)
         {
-            var entities = _mapper.Map<TEntity[]>(dtos);
-            return await _repository.UpdateAsync(entities);
+            int[] ids = dtos.Select(dto => dto.Id).ToArray();
+
+#nullable disable
+            IEnumerable<TEntity> current_entities = (await Task.WhenAll(ids
+                .Select(async id => await _repository.GetByIdAsync(id))))
+                .Where(entity => entity is not null);
+#nullable restore
+            var entities = _mapper.Map(dtos, current_entities);
+            return await _repository.UpdateAsync(entities.ToArray());
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -64,7 +72,7 @@ namespace AspBlog.Application.Services
             IEnumerable<TEntity> entities = (await Task.WhenAll(ids
                 .Select(async id => await _repository.GetByIdAsync(id))))
                 .Where(entity => entity is not null);
-# nullable enable
+#nullable restore
 
             return await _repository.DeleteAsync(entities.ToArray());
         }
