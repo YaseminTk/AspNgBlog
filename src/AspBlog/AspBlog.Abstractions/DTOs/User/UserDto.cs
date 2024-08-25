@@ -9,7 +9,7 @@ namespace AspBlog.Abstractions.DTOs.User
         string Role,
         DateTime CreatedAt,
         DateTime? ChangedAt,
-        int ChangedById,
+        int? ChangedById,
         UserDto? ChangedBy)
         : BaseDto(Id, CreatedAt, ChangedAt);
 }

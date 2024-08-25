@@ -32,7 +32,7 @@ namespace AspBlog.Infrastructure
             string hashed_password = passwordHasher.HashPassword(full_name, full_name);
 
             modelBuilder.Entity<User>().HasData(
-                new {
+                new User {
                     Id = -1,
                     FullName = full_name,
                     UserName = user_name,
