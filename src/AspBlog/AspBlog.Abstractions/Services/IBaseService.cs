@@ -6,12 +6,16 @@
 
         public Task<TDto?> GetByIdAsync(int id);
 
-        public Task<bool> Create(TCreateDto dto);
+        public Task<bool> CreateAsync(TCreateDto dto);
 
-        public Task<int> Create(params TCreateDto[] dtos);
+        public Task<int> CreateAsync(params TCreateDto[] dtos);
 
-        public Task<bool> Update(TUpdateDto dto);
+        public Task<bool> UpdateAsync(TUpdateDto dto);
 
-        public Task<int> Update(params TUpdateDto[] dtos);
+        public Task<int> UpdateAsync(params TUpdateDto[] dtos);
+
+        public Task<bool> DeleteAsync(int id);
+
+        public Task<int> DeleteAsync(params int[] ids);
     }
 }

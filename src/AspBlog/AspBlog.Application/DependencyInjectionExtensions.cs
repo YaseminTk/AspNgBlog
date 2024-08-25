@@ -7,6 +7,6 @@ namespace AspBlog.Application
 {
     public static class DependencyInjectionExtensions
     {
-        public static IServiceCollection AddPostService(this IServiceCollection services) => services.AddScoped<IPostService<Post, PostInfo>, PostService>();
+        public static IServiceCollection AddPostService(this IServiceCollection services) => services.AddScoped<IPostService<Post>, PostService>();
     }
 }

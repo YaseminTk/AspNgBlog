@@ -28,28 +28,45 @@ namespace AspBlog.Application.Services
             return entity is null ? null : _mapper.Map<TDto>(entity);
         }
 
-        public async Task<bool> Create(TCreateDto dto)
+        public async Task<bool> CreateAsync(TCreateDto dto)
         {
             var entity = _mapper.Map<TEntity>(dto);
             return await _repository.CreateAsync(entity);
         }
 
-        public async Task<int> Create(params TCreateDto[] dtos)
+        public async Task<int> CreateAsync(params TCreateDto[] dtos)
         {
             var entities = _mapper.Map<TEntity[]>(dtos);
             return await _repository.CreateAsync(entities);
         }
 
-        public async Task<bool> Update(TUpdateDto dto)
+        public async Task<bool> UpdateAsync(TUpdateDto dto)
         {
             var entity = _mapper.Map<TEntity>(dto);
             return await _repository.UpdateAsync(entity);
         }
 
-        public async Task<int> Update(params TUpdateDto[] dtos)
+        public async Task<int> UpdateAsync(params TUpdateDto[] dtos)
         {
             var entities = _mapper.Map<TEntity[]>(dtos);
             return await _repository.UpdateAsync(entities);
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var entitiy = await _repository.GetByIdAsync(id);
+            return entitiy is not null && await _repository.DeleteAsync(entitiy);
+        }
+
+        public async Task<int> DeleteAsync(params int[] ids)
+        {
+#nullable disable
+            IEnumerable<TEntity> entities = (await Task.WhenAll(ids
+                .Select(async id => await _repository.GetByIdAsync(id))))
+                .Where(entity => entity is not null);
+# nullable enable
+
+            return await _repository.DeleteAsync(entities.ToArray());
         }
     }
 }
