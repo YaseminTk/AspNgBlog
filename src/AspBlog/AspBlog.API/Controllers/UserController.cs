@@ -1,4 +1,5 @@
-﻿using AspBlog.Abstractions.Services;
+﻿using AspBlog.Abstractions.DTOs.User;
+using AspBlog.Abstractions.Services;
 using AspBlog.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,67 @@ namespace AspBlog.API.Controllers
             {
                 var user = await userService.GetByIdAsync(id);
                 return user is null ? NotFound() : Ok(user);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "{message}", ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateAsync([FromBody] UserCreateDto user)
+        {
+            try
+            {
+                return await userService.CreateAsync(user) ? Ok() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "{message}", ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> UpdateAsync([FromBody] UserUpdateDto user)
+        {
+            try
+            {
+                return await userService.UpdateAsync(user) ? Ok() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "{message}", ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> DeleteAsync()
+        {
+            try
+            {
+                var user_id = User.GetId();
+                return await userService.DeleteAsync(user_id) ? Ok() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "{message}", ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id)
+        {
+            try
+            {
+                return await userService.DeleteAsync(id) ? Ok() : BadRequest();
             }
             catch (Exception ex)
             {

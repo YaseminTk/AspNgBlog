@@ -6,8 +6,7 @@ namespace AspBlog.Abstractions.DTOs.User
     public record UserUpdateDto(
         int Id,
         string UserName,
-        string FullName,
-        string Role
+        string FullName
         ) : BaseUpdateDto(Id)
     {
         [JsonIgnore]
