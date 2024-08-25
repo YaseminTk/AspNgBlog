@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AspBlog.Domain.Entities
 {
@@ -7,7 +8,8 @@ namespace AspBlog.Domain.Entities
     public class Post : PostInfo
     {
         [Required]
-        [Column(TypeName = "nvarchar(max)")]
-        public required string Content { get; set; }
+        [NotNull]
+        [Column("content", TypeName = "nvarchar(max)")]
+        public required string Content { get; init; }
     }
 }

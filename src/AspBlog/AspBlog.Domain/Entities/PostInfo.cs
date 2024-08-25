@@ -8,10 +8,12 @@ namespace AspBlog.Domain.Entities
     {
         [Required]
         [StringLength(50)]
+        [Column("title")]
         public required string Title { get; set; }
 
         [Required]
         [StringLength(100)]
+        [Column("description")]
         public required string Description { get; set; }
     }
 }

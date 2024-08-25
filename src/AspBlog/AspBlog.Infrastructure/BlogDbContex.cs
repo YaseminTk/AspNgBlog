@@ -5,9 +5,9 @@ namespace AspBlog.Infrastructure
 {
     public class BlogDbContex : DbContext
     {
-        public readonly DbSet<Post> Posts;
-
-        public readonly DbSet<PostInfo> PostInfos;
+        public DbSet<Post> Posts { get; set; }
+        
+        public DbSet<PostInfo> PostInfos { get; set; }
 
         public BlogDbContex(DbContextOptions options) : base(options)
         {
