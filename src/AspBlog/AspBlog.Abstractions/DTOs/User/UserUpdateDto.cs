@@ -1,4 +1,5 @@
 ﻿using AspBlog.Abstractions.DTOs.Base;
+using System.Text.Json.Serialization;
 
 namespace AspBlog.Abstractions.DTOs.User
 {
@@ -7,5 +8,9 @@ namespace AspBlog.Abstractions.DTOs.User
         string UserName,
         string FullName,
         string Role
-        ) : BaseUpdateDto(Id);
+        ) : BaseUpdateDto(Id)
+    {
+        [JsonIgnore]
+        public int ChangedById { get; set; }
+    };
 }

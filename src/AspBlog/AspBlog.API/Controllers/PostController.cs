@@ -8,14 +8,14 @@ namespace AspBlog.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController(ILogger<PostController> logger, IPostService<Post> postService) : ControllerBase
+    public class PostController(ILogger<PostController> logger, IPostService<Post> postService, IUserService<User> userService) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery] bool with_content = false)
+        public async Task<IActionResult> GetAsync([FromQuery] bool content = false)
         {
             try
             {
-                var posts = with_content ? await postService.GetAllAsync() : await postService.GetAllInfosAsync();
+                var posts = content ? await postService.GetAllAsync() : await postService.GetAllInfosAsync();
                 return Ok(posts);
             }              
             catch (Exception ex)
@@ -26,7 +26,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,writer")]
         public async Task<IActionResult> CreateAsync([FromBody] PostCreateDto post)
         {
             try
@@ -42,12 +42,16 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,writer")]
         public async Task<IActionResult> UpdateAsync([FromBody] PostUpdateDto post)
         {
             try
             {
-                post.ChangedById = User.GetId();
+                // check if the post created by the current user
+                var current_post = await postService.GetByIdAsync(post.Id);
+                if(current_post?.CreatedById != User.GetId())
+                    return Unauthorized();
+
                 return await postService.UpdateAsync(post) ? Ok() : BadRequest();
             }
             catch (Exception ex)
@@ -58,27 +62,20 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,writer")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             try
             {
-                return await postService.DeleteAsync(id) ? Ok() : BadRequest();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "{message}", ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
+                // a writer can delete only own post
+                if (User.GetRoleName() == "writer")
+                {
+                    var current_post = await postService.GetByIdAsync(id);
+                    if(current_post?.CreatedById != User.GetId())
+                        return Unauthorized();
+                }
 
-        [HttpDelete]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteAsync([FromQuery] int[] id)
-        {
-            try
-            {
-                return Ok(await postService.DeleteAsync(id));
+                return await postService.DeleteAsync(id) ? Ok() : BadRequest();
             }
             catch (Exception ex)
             {

@@ -1,5 +1,4 @@
-﻿using AspBlog.Abstractions.DTOs.User;
-using AspBlog.Abstractions.Services;
+﻿using AspBlog.Abstractions.Services;
 using AspBlog.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,7 @@ namespace AspBlog.API.Controllers
     public class UserController(ILogger<UserController> logger, IUserService<User> userService) : ControllerBase
     {
         [HttpGet]
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAsync([FromQuery] string? userName = null)
         {
             try
@@ -35,7 +34,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             try
