@@ -10,10 +10,7 @@ namespace AspBlog.Abstractions.DTOs.Post
         string Title,
         string Description,
         int CreatedById,
-        int ChangedById,
         UserDto? CreatedBy,
-        UserDto? ChangedBy) 
-        : BaseDto(Id, CreatedAt, ChangedAt, CreatedById, ChangedById, CreatedBy, ChangedBy)
-    {
-    }
+        string? Author) 
+        : BaseDto(Id, CreatedAt, ChangedAt);
 }

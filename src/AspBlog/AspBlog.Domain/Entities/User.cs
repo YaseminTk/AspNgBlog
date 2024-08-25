@@ -30,5 +30,13 @@ namespace AspBlog.Domain.Entities
         [StringLength(20)]
         [Column("role")]
         public required string Role { get; set; }
+
+        [Required]
+        [NotNull]
+        [Column("changed_by_id")]
+        public required int ChangedById { get; set; }
+
+        [ForeignKey(nameof(ChangedById))]
+        public User? ChangedBy { get; init; }
     }
 }
