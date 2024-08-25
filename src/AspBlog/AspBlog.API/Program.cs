@@ -1,6 +1,7 @@
 using AspBlog.Infrastructure;
 using AspBlog.Application;
 using Microsoft.EntityFrameworkCore;
+using AspBlog.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<AuthenticationOptions>(config);
 
 var app = builder.Build();
 
