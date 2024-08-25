@@ -2,7 +2,7 @@
 
 namespace AspBlog.Abstractions.Services.DTOs.Post
 {
-    public record PostInfoDto(DateTime CreatedAt, DateTime? ChangedAt, string Title, string Description) : BaseDto(CreatedAt, ChangedAt)
+    public record PostInfoDto(int Id, DateTime CreatedAt, DateTime? ChangedAt, string Title, string Description) : BaseDto(Id, CreatedAt, ChangedAt)
     {
     }
 }
