@@ -29,7 +29,7 @@ namespace AspBlog.Domain.Entities
         [NotNull]
         [StringLength(20)]
         [Column("role")]
-        public required string Role { get; set; }
+        public required string Role { get; set; } = "user";
 
         [Required]
         [NotNull]

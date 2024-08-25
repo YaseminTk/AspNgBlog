@@ -14,5 +14,12 @@ namespace AspBlog.Application.Services
             var user = await _repository.GetByUserNameAsync(userName);
             return user is null ? null : _mapper.Map<UserDto>(user);
         }
+
+        public async Task<bool> UpdateAsync(RoleUpdateDto dto)
+        {
+            var current_entitiy = await _repository.GetByIdAsync(dto.Id);
+            var entity = _mapper.Map(dto, current_entitiy);
+            return entity is not null && await _repository.UpdateAsync(entity);
+        }
     }
 }

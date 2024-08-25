@@ -80,6 +80,31 @@ namespace AspBlog.API.Controllers
             }
         }
 
+        [HttpPut("role")]
+        [Authorize(Roles = $"{Role.Admin},{Role.Writer}")]
+        public async Task<IActionResult> UpdateAsync([FromBody] RoleUpdateDto update)
+        {
+            try
+            {
+                var user_role = User.GetRoleName();
+ 
+                if(update.Role == Role.Admin)
+                {
+                    if(user_role != Role.Admin)
+                        return Unauthorized();
+                }                    
+                else if(update.Role != Role.Writer && update.Role != Role.User)
+                    return BadRequest();
+
+                return await userService.UpdateAsync(update) ? Ok() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "{message}", ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpDelete]
         [Authorize]
         public async Task<IActionResult> DeleteAsync()
@@ -97,7 +122,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = $"{Role.Admin}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             try

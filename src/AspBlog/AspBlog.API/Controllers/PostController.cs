@@ -26,7 +26,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin,writer")]
+        [Authorize(Roles = $"{Role.Admin},{Role.Writer}")]
         public async Task<IActionResult> CreateAsync([FromBody] PostCreateDto post)
         {
             try
@@ -42,7 +42,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "admin,writer")]
+        [Authorize(Roles = $"{Role.Admin},{Role.Writer}")]
         public async Task<IActionResult> UpdateAsync([FromBody] PostUpdateDto post)
         {
             try
@@ -62,7 +62,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin,writer")]
+        [Authorize(Roles = $"{Role.Admin},{Role.Writer}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             try

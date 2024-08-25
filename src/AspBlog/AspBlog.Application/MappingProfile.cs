@@ -20,6 +20,7 @@ namespace AspBlog.Application
                 user => user.PasswordHash,
                 opt => opt.MapFrom(dto => passwordHasher.HashPassword(dto.UserName, dto.Password)));
             CreateMap<LogInDto, LogInUpdateDto>();
+            CreateMap<RoleUpdateDto, User>();
 
             CreateMap<Post, PostDto>();
             CreateMap<PostInfo, PostInfoDto>();
