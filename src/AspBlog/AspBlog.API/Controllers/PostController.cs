@@ -1,5 +1,5 @@
-﻿using AspBlog.Abstractions.Services;
-using AspBlog.Abstractions.Services.DTOs.Post;
+﻿using AspBlog.Abstractions.DTOs.Post;
+using AspBlog.Abstractions.Services;
 using AspBlog.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 

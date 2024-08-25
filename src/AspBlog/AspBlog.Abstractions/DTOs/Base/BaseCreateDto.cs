@@ -1,4 +1,4 @@
-﻿namespace AspBlog.Abstractions.Services.DTOs.Base
+﻿namespace AspBlog.Abstractions.DTOs.Base
 {
     public record BaseCreateDto
     {

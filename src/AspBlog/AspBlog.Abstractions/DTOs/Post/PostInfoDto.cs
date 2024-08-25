@@ -1,6 +1,6 @@
-﻿using AspBlog.Abstractions.Services.DTOs.Base;
+﻿using AspBlog.Abstractions.DTOs.Base;
 
-namespace AspBlog.Abstractions.Services.DTOs.Post
+namespace AspBlog.Abstractions.DTOs.Post
 {
     public record PostInfoDto(int Id, DateTime CreatedAt, DateTime? ChangedAt, string Title, string Description) : BaseDto(Id, CreatedAt, ChangedAt)
     {

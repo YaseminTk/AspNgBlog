@@ -1,4 +1,4 @@
-﻿using AspBlog.Abstractions.Services.DTOs.Post;
+﻿using AspBlog.Abstractions.DTOs.Post;
 
 namespace AspBlog.Abstractions.Services
 {

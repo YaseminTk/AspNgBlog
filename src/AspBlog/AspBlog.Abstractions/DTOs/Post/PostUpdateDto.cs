@@ -1,6 +1,6 @@
-﻿using AspBlog.Abstractions.Services.DTOs.Base;
+﻿using AspBlog.Abstractions.DTOs.Base;
 
-namespace AspBlog.Abstractions.Services.DTOs.Post
+namespace AspBlog.Abstractions.DTOs.Post
 {
     public record PostUpdateDto(int Id, string Title, string Description, string Content) : BaseUpdateDto(Id)
     {

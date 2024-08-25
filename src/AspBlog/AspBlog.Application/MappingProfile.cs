@@ -1,4 +1,4 @@
-﻿using AspBlog.Abstractions.Services.DTOs.Post;
+﻿using AspBlog.Abstractions.DTOs.Post;
 using AspBlog.Domain.Entities;
 using AutoMapper;
 
