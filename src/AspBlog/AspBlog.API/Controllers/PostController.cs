@@ -1,6 +1,7 @@
 ﻿using AspBlog.Abstractions.DTOs.Post;
 using AspBlog.Abstractions.Services;
 using AspBlog.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -26,6 +27,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateAsync([FromBody] PostCreateDto post)
         {
             try
@@ -41,6 +43,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateAsync([FromBody] PostUpdateDto post)
         {
             try
@@ -56,6 +59,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
             try
@@ -70,6 +74,7 @@ namespace AspBlog.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteAsync([FromQuery] int[] id)
         {
             try
