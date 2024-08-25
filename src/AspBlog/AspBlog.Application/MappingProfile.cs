@@ -1,18 +1,27 @@
 ﻿using AspBlog.Abstractions.DTOs.Post;
+using AspBlog.Abstractions.DTOs.User;
 using AspBlog.Domain.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspBlog.Application
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile()
+        public MappingProfile(PasswordHasher<string> passwordHasher)
         {
             CreateMap<PostCreateDto, Post>();
             CreateMap<PostUpdateDto, Post>();
+            CreateMap<UserCreateDto, User>().ForMember(
+                user => user.PasswordHash, 
+                opt => opt.MapFrom(dto => passwordHasher.HashPassword(dto.UserName, dto.Password)));
+            CreateMap<UserUpdateDto, User>().ForMember(
+                user => user.PasswordHash,
+                opt => opt.MapFrom(dto => passwordHasher.HashPassword(dto.UserName, dto.Password)));
 
             CreateMap<Post, PostDto>();
             CreateMap<PostInfo, PostInfoDto>();
+            CreateMap<User, UserDto>();
         }
     }
 }
