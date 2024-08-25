@@ -7,7 +7,7 @@ using AutoMapper;
 namespace AspBlog.Application.Services
 {
     public class PostService(IPostRepository<Post, PostInfo> repository, IMapper mapper) 
-        : BaseService<Post, IPostRepository<Post, PostInfo>, PostDto, PostCreateDto, PostUpdateDto>(repository, mapper), IPostService<Post, PostInfo>
+        : BaseService<Post, IPostRepository<Post, PostInfo>, PostDto, PostCreateDto, PostUpdateDto>(repository, mapper), IPostService<Post>
     {
         public async Task<IEnumerable<PostInfoDto>> GetAllInfosAsync()
         {

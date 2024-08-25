@@ -1,10 +1,8 @@
-﻿using AspBlog.Abstractions.Repositories;
-using AspBlog.Abstractions.Services.DTOs.Post;
+﻿using AspBlog.Abstractions.Services.DTOs.Post;
 
 namespace AspBlog.Abstractions.Services
 {
-    public interface IPostService<TPost, TPostInfo> : IBaseService<TPost, IPostRepository<TPost, TPostInfo>, PostDto, PostCreateDto, PostUpdateDto>
-        where TPost : TPostInfo
+    public interface IPostService<TPost> : IBaseService<TPost, PostDto, PostCreateDto, PostUpdateDto>
     {
         public Task<IEnumerable<PostInfoDto>> GetAllInfosAsync();
 

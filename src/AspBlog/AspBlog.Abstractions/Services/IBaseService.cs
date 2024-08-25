@@ -1,8 +1,6 @@
-﻿using AspBlog.Abstractions.Repositories;
-
-namespace AspBlog.Abstractions.Services
+﻿namespace AspBlog.Abstractions.Services
 {
-    public interface IBaseService<TEntity, TRepository, TDto, TCreateDto, TUpdateDto> where TRepository : IBaseRepository<TEntity>
+    public interface IBaseService<TEntity, TDto, TCreateDto, TUpdateDto>
     {
         public Task<IEnumerable<TDto>> GetAllAsync();
 

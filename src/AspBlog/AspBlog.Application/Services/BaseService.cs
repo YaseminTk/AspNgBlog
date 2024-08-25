@@ -7,7 +7,7 @@ using AutoMapper;
 namespace AspBlog.Application.Services
 {
     public class BaseService<TEntity, TRepository, TDto, TCreateDto, TUpdateDto>(TRepository repository, IMapper mapper) 
-        : IBaseService<TEntity, TRepository, TDto, TCreateDto, TUpdateDto>
+        : IBaseService<TEntity, TDto, TCreateDto, TUpdateDto>
         where TEntity : BaseEntity
         where  TRepository : IBaseRepository<TEntity>
         where TDto : BaseDto where TCreateDto : BaseCreateDto where TUpdateDto : BaseUpdateDto
