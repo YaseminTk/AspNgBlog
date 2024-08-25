@@ -3,7 +3,6 @@ using AspBlog.Abstractions.Services;
 using AspBlog.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace AspBlog.API.Controllers
 {

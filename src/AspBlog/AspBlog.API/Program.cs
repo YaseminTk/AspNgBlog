@@ -9,12 +9,10 @@ var config = builder.Configuration;
 // Add db context
 builder.Services.AddDbContext<BlogDbContex>(options => options.UseSqlServer(config.GetConnectionString("Default")));
 
-// Add repositories, auto-mapper and services to the container.
+// Add repositories and services to the container.
 builder.Services
-    .AddPostRepository()
-    .AddPostService();
-
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+    .AddBlogRepositories()
+    .AddBlogServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

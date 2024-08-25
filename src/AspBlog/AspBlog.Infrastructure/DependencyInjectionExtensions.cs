@@ -9,5 +9,12 @@ namespace AspBlog.Infrastructure
     {
         public static IServiceCollection AddPostRepository(this IServiceCollection services) 
             => services.AddScoped<IPostRepository<Post, PostInfo>, PostRepository>();
+
+        public static IServiceCollection AddUserRepository(this IServiceCollection services)
+            => services.AddScoped<IUserRepository<User>, UserRepository>();
+
+        public static IServiceCollection AddBlogRepositories(this IServiceCollection services) => services
+            .AddPostRepository()
+            .AddUserRepository();
     }
 }

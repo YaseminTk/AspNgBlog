@@ -1,4 +1,17 @@
-﻿namespace AspBlog.Abstractions.DTOs.Post
+﻿using AspBlog.Abstractions.DTOs.User;
+
+namespace AspBlog.Abstractions.DTOs.Post
 {
-    public record PostDto(int Id, DateTime CreatedAt, DateTime? ChangedAt, string Title, string Description, string Content) : PostInfoDto(Id, CreatedAt, ChangedAt, Title, Description);
+    public record PostDto(
+        int Id,
+        DateTime CreatedAt,
+        DateTime? ChangedAt,
+        string Title,
+        string Description,
+        string Content,
+        int CreatedById,
+        int ChangedById,
+        UserDto? CreatedBy,
+        UserDto? ChangedBy)
+        : PostInfoDto(Id, CreatedAt, ChangedAt, Title, Description, CreatedById, ChangedById, CreatedBy, ChangedBy);
 }
