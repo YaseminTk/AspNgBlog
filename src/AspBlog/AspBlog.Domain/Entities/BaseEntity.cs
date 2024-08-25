@@ -24,16 +24,8 @@ namespace AspBlog.Domain.Entities
 
         [Required]
         [NotNull]
-        [Column("created_by_id")]
-        public required int CreatedById { get; init; }
-
-        [Required]
-        [NotNull]
         [Column("changed_by_id")]
         public required int ChangedById { get; set; }
-
-        [ForeignKey(nameof(CreatedById))]
-        public User? CreatedBy { get; init; }
 
         [ForeignKey(nameof(ChangedById))]
         public User? ChangedBy { get; init; }

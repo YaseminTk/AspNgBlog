@@ -11,5 +11,13 @@ namespace AspBlog.Domain.Entities
         [NotNull]
         [Column("content", TypeName = "nvarchar(max)")]
         public required string Content { get; init; }
+
+        [Required]
+        [NotNull]
+        [Column("created_by_id")]
+        public required int CreatedById { get; init; }
+
+        [ForeignKey(nameof(CreatedById))]
+        public User? CreatedBy { get; init; }
     }
 }
