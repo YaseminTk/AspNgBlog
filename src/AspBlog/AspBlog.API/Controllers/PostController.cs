@@ -8,7 +8,7 @@ namespace AspBlog.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController(ILogger<PostController> logger, IPostService<Post> postService, IUserService<User> userService) : ControllerBase
+    public class PostController(ILogger<PostController> logger, IPostService<Post> postService) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetAsync([FromQuery] bool content = false)
