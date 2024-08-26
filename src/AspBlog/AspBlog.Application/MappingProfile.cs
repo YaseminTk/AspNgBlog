@@ -8,7 +8,8 @@ namespace AspBlog.Application
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile(PasswordHasher<string> passwordHasher)
+        public static readonly PasswordHasher<string> passwordHasher = new();
+        public MappingProfile()
         {
             CreateMap<PostCreateDto, Post>();
             CreateMap<PostUpdateDto, Post>();

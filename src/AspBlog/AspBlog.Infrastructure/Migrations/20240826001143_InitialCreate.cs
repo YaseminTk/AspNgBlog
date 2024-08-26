@@ -71,7 +71,7 @@ namespace AspBlog.Infrastructure.Migrations
                 schema: "blog",
                 table: "user",
                 columns: new[] { "id", "changed_at", "changed_by_id", "created_at", "full_name", "password_hash", "role", "user_name" },
-                values: new object[] { -1, null, null, new DateTime(2024, 8, 26, 1, 4, 28, 814, DateTimeKind.Local).AddTicks(2063), "Admin", "AQAAAAIAAYagAAAAEDjMnrp33rrvr9tkGu7X7RTRFaOqSbiFTsbTThsE7CvEAp1Q0plN8H7P5Sr7mwD04Q==", "admin", "admin" });
+                values: new object[] { -1, null, null, new DateTime(2024, 8, 26, 2, 11, 43, 547, DateTimeKind.Local).AddTicks(9637), "Admin", "AQAAAAIAAYagAAAAEGRVlM/Ykbqfi+XwQp3J3Z6pF2y/rHIdgTV2QkE7o06RcU6ybLWAcoT49rZh86r/Yw==", "admin", "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_post_created_by_id",

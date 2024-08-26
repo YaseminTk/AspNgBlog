@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspBlog.Infrastructure.Migrations
 {
     [DbContext(typeof(BlogDbContex))]
-    [Migration("20240825230429_InitialCreate")]
+    [Migration("20240826001143_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -129,9 +129,9 @@ namespace AspBlog.Infrastructure.Migrations
                         new
                         {
                             Id = -1,
-                            CreatedAt = new DateTime(2024, 8, 26, 1, 4, 28, 814, DateTimeKind.Local).AddTicks(2063),
+                            CreatedAt = new DateTime(2024, 8, 26, 2, 11, 43, 547, DateTimeKind.Local).AddTicks(9637),
                             FullName = "Admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDjMnrp33rrvr9tkGu7X7RTRFaOqSbiFTsbTThsE7CvEAp1Q0plN8H7P5Sr7mwD04Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGRVlM/Ykbqfi+XwQp3J3Z6pF2y/rHIdgTV2QkE7o06RcU6ybLWAcoT49rZh86r/Yw==",
                             Role = "admin",
                             UserName = "admin"
                         });

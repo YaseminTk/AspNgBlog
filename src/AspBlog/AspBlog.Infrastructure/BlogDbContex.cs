@@ -29,7 +29,7 @@ namespace AspBlog.Infrastructure
             PasswordHasher<string> passwordHasher = new();
             string full_name = "Admin";
             string user_name = full_name.ToLower();
-            string hashed_password = passwordHasher.HashPassword(full_name, full_name);
+            string hashed_password = passwordHasher.HashPassword(user_name, user_name);
 
             modelBuilder.Entity<User>().HasData(
                 new User {
