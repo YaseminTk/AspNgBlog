@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component'
+import { AuthService } from '../../services/auth.service'
+
 @Component({
   selector: 'navbar',
   standalone: true,
@@ -11,11 +13,13 @@ import { LoginComponent } from '../login/login.component'
 })
 export class NavbarComponent {
   public dialog: MatDialog = inject(MatDialog);
-  dialogConfig: MatDialogConfig = {
+  public authService: AuthService = inject(AuthService);
+  dialogConfig: MatDialogConfig = {}
 
-  }
-  openLogin() {
-
-    this.dialog.open(LoginComponent, this.dialogConfig);
+  async toggleAuth() {
+    if(this.authService.isLogedIn)
+      await this.authService.logoutAsync();
+    else
+      this.dialog.open(LoginComponent, this.dialogConfig);
   }
 }
