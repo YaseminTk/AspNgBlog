@@ -27,4 +27,8 @@ export class NavbarComponent {
     else
       this.dialog.open(LoginComponent, this.dialogConfig);
   }
+
+  openSettings() {
+    
+  }
 }

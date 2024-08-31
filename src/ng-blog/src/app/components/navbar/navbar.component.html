@@ -15,10 +15,15 @@
         </li>
       </ul>
       @if(authService.isLogedIn){
-      <button mat-button [matMenuTriggerFor]="beforeMenu" class="d-flex"><mat-icon
-          style="transform: scale(2.5);">account_circle</mat-icon></button>
-      <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item class="btn p-2" type="button" (click)="toggleAuth()">
+      <button mat-button [matMenuTriggerFor]="beforeMenu" class="d-flex">
+        <mat-icon style="transform: scale(2.5);">account_circle</mat-icon>
+      </button>
+      <mat-menu class="mt-2" #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item class="btn p-1" type="button" (click)="openSettings()">
+          Account Settings
+          <mat-icon>settings</mat-icon>
+        </button>
+        <button mat-menu-item class="btn p-1" type="button" (click)="toggleAuth()">
           Log Out
           <mat-icon>login</mat-icon>
         </button>
