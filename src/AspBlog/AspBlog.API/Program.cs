@@ -8,6 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowedOriginsPolicy", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 int cookieExpiresInMinutes = config.GetValue<int>("AuthenticationOptions:ExpiresInMinutes");
 if (cookieExpiresInMinutes == default)
     cookieExpiresInMinutes = 180;
@@ -45,6 +57,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<AuthenticationOptions>(config);
 
 var app = builder.Build();
+
+app.UseCors("AllowedOriginsPolicy");
 
 using var scope = app.Services.CreateScope();
 using var context = scope.ServiceProvider.GetRequiredService<BlogDbContex>();
