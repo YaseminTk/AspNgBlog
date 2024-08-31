@@ -14,12 +14,24 @@
           <a class="nav-link active" aria-current="page" href="#">Posts</a>
         </li>
       </ul>
+      @if(authService.isLogedIn){
+      <button mat-button [matMenuTriggerFor]="beforeMenu" class="d-flex"><mat-icon
+          style="transform: scale(2.5);">account_circle</mat-icon></button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item class="btn p-2" type="button" (click)="toggleAuth()">
+          Log Out
+          <mat-icon>login</mat-icon>
+        </button>
+      </mat-menu>
+      }
+      @else {
       <form class="d-flex" role="search">
         <button class="btn d-flex align-items-center" type="button" (click)="toggleAuth()">
-          {{(authService.isLogedIn ? 'Log Out' : 'Log In')}}
+          Log In
           <mat-icon class="ms-2">login</mat-icon>
         </button>
       </form>
+      }
     </div>
   </div>
 </nav>
