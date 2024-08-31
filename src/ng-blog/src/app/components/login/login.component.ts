@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,11 +9,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'
 import { HttpClientModule } from '@angular/common/http'
+import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatGridListModule, MatDividerModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatGridListModule, MatDividerModule, FormsModule, ReactiveFormsModule, HttpClientModule, MatProgressSpinnerModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -26,6 +30,11 @@ export class LoginComponent {
   readonly fb: FormBuilder = inject(FormBuilder);
   form!: FormGroup;
   readonly authService: AuthService;
+  public dialog: MatDialog = inject(MatDialog);
+
+  loading: boolean = false;
+
+  private _snackBar = inject(MatSnackBar);
 
   constructor() {
     this.authService = inject(AuthService)
@@ -38,11 +47,27 @@ export class LoginComponent {
     });
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit() {
     if (this.form.valid) {
-      await this.authService.loginAsync({ userName: this.form.value.userName, password: this.form.value.password }).then(console.log);
+      this.loading = true;
+      this.authService.login({ userName: this.form.value.userName, password: this.form.value.password }).subscribe({
+        next: res => {
+          this.dialog.closeAll()
+        },
+        error: err => {
+          console.log(err.status)
+          if(err.status === 401)
+            this._snackBar.open("The username or password you entered is incorrect.", "Ok")
+          else
+          this._snackBar.open("An internal service error has occurred. Please try again later or contact support.", "Ok")
+          this.loading = false;
+        },
+        complete: () => {
+          this.loading = false;
+        },
+      });
     } else {
-      console.log('Form is invalid');
+      this._snackBar.open("Username or password is missing.", "Ok")
     }
   }
 }

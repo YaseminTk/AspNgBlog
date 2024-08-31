@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [ngClass]="{ 'loading': loading }" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="container p-5" data-bs-theme="dark">
     <div class="row p-0 m-0">
       <mat-form-field>
@@ -18,7 +18,7 @@
     </div>
     <div class="row p-0 m-0 px-1">
       <div class="col-6">
-        <button mat-raised-button type="button">
+        <button mat-raised-button type="button" (click)="onSubmit()">
           <mat-icon>login</mat-icon>
           Log In
         </button>
@@ -26,3 +26,4 @@
     </div>
   </div>
 </form>
+<mat-spinner [ngClass]="{ 'loading-spinner': loading }" diameter="200" [ngStyle]="{ 'display': loading ? 'block':'none' }"></mat-spinner>

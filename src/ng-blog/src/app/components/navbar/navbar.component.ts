@@ -14,7 +14,10 @@ import { AuthService } from '../../services/auth.service'
 export class NavbarComponent {
   public dialog: MatDialog = inject(MatDialog);
   public authService: AuthService = inject(AuthService);
-  dialogConfig: MatDialogConfig = {}
+  dialogConfig: MatDialogConfig = {
+    width: "30vw",
+    height: "40vh"
+  }
 
   async toggleAuth() {
     if(this.authService.isLogedIn)
