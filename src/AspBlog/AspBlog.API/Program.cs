@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.SameSite = SameSiteMode.Strict; // Prevent cookies from being sent with cross-site requests
 
         // Optional: Customize cookie name
-        options.Cookie.Name = "YourAppNameCookie";
+        options.Cookie.Name = "UserSessionCookie";
     });
 
 // Add db context
