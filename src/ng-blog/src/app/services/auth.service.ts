@@ -1,7 +1,7 @@
 import { Injectable, Inject, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { API_URL } from '../../token';
-import { firstValueFrom, Observable, Observer, tap } from 'rxjs';
+import { firstValueFrom, map, Observable, Observer, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,22 @@ export class AuthService {
 
   public async logoutAsync(): Promise<any> {
     return await firstValueFrom(this.logout());
+  }
+
+  public check(): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check`).pipe(
+      map((res: boolean) => {
+        this._isLogedIn = res;
+        return res;
+      }),
+      tap({
+        error: err => this._isLogedIn = false
+      })
+    );
+  }
+
+  public checkAsync(): Promise<boolean> {
+    return firstValueFrom(this.check())
   }
 
   private _isLogedIn = false;
