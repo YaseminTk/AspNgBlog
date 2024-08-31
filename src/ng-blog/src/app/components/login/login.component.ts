@@ -55,7 +55,6 @@ export class LoginComponent {
           this.dialog.closeAll()
         },
         error: err => {
-          console.log(err.status)
           if(err.status === 401)
             this._snackBar.open("The username or password you entered is incorrect.", "Ok")
           else

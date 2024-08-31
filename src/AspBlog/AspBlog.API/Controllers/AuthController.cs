@@ -16,7 +16,7 @@ namespace AspBlog.API.Controllers
     {
         [HttpPost("in")]
         [AllowAnonymous]
-        public async Task<IActionResult> LogIn([FromForm] LogInDto logIn)
+        public async Task<IActionResult> LogIn([FromBody] LogInDto logIn)
         {
             if(!await authService.Verify(logIn))
                 return Unauthorized();
