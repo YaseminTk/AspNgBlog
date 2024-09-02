@@ -34,8 +34,5 @@ namespace AspBlog.Domain.Entities
         [AllowNull]
         [Column("changed_by_id")]
         public int? ChangedById { get; set; }
-
-        [ForeignKey(nameof(ChangedById))]
-        public User? ChangedBy { get; init; }
     }
 }

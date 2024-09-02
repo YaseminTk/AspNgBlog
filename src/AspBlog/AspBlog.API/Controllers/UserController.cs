@@ -11,20 +11,26 @@ namespace AspBlog.API.Controllers
     public class UserController(ILogger<UserController> logger, IUserService<User> userService) : ControllerBase
     {
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAsync([FromQuery] string? userName = null)
+        [Authorize]
+        public async Task<IActionResult> GetAsync([FromQuery] string? userName = null, bool current = false)
         {
             try
             {
-                if (userName is null)
-                {
-                    var users = await userService.GetAllAsync();
-                    return Ok(users);
-                }
-                else
+                if(userName is not null)
                 {
                     var user = await userService.GetByUserNameAsync(userName);
                     return user is null ? NotFound() : Ok(user);
+                }
+                else if (current)
+                {
+                    var id = User.GetId();
+                    var user = await userService.GetByIdAsync(id);
+                    return user is null ? NotFound() : Ok(user);
+                }
+                else
+                {
+                    var users = await userService.GetAllAsync();
+                    return Ok(users);
                 }
             }
             catch (Exception ex)
@@ -71,7 +77,17 @@ namespace AspBlog.API.Controllers
         {
             try
             {
-                return await userService.UpdateAsync(user) ? Ok() : BadRequest();
+                user.ChangedById = User.GetId();
+                switch (User.GetRoleName())
+                {
+                    case Role.Admin:
+                        return await userService.UpdateAsync(user) ? Ok() : BadRequest();
+                    default:
+                        if (user.Id == User.GetId())
+                            return await userService.UpdateAsync(user) ? Ok() : BadRequest();
+                        else
+                            return Unauthorized();
+                }
             }
             catch (Exception ex)
             {

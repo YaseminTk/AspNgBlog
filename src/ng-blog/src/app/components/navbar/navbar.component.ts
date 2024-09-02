@@ -5,6 +5,7 @@ import { LoginComponent } from '../login/login.component'
 import { AuthService } from '../../services/auth.service'
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { AccountSettingsComponent } from '../account-settings/account-settings.component';
 
 @Component({
   selector: 'navbar',
@@ -25,10 +26,10 @@ export class NavbarComponent {
     if (this.authService.isLogedIn)
       await this.authService.logoutAsync();
     else
-      this.dialog.open(LoginComponent, this.dialogConfig);
+      this.dialog.open(LoginComponent);
   }
 
   openSettings() {
-    
+    this.dialog.open(AccountSettingsComponent);
   }
 }

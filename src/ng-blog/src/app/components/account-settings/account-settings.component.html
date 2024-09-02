@@ -1,0 +1,54 @@
+<form [ngClass]="{ 'loading': loading }" [formGroup]="form">
+  <div class="container p-5" data-bs-theme="dark">
+    <div class="row p-0 m-0">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="userName">
+      </mat-form-field>
+    </div>
+    <div class="row p-0 m-0">
+      <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName">
+      </mat-form-field>
+    </div>
+    <div class="row p-0 m-0">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password1" />
+          <button mat-icon-button matSuffix (click)="pwClickEvent($event)" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()">
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password2" />
+          <button mat-icon-button matSuffix (click)="pwClickEvent($event)" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()">
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row p-0 m-0 px-1 container-fluid">
+      <div class="col">
+        <button mat-raised-button type="button" (click)="reset()">
+          <mat-icon>cancel</mat-icon>
+          Cancel
+        </button>
+      </div>
+      <div class="col">
+        <button mat-raised-button type="button" (click)="update()">
+          <mat-icon>update</mat-icon>
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+<mat-spinner [ngClass]="{ 'loading-spinner': loading }" diameter="200"
+  [ngStyle]="{ 'display': loading ? 'block':'none' }"></mat-spinner>
